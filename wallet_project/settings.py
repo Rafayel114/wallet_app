@@ -154,3 +154,5 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+TIMEOUT_REQUEST = 5  # Устанавливаем таймаут в 5 секунд

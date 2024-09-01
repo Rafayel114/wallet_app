@@ -1,0 +1,6 @@
+MYSQL_DATABASE=databas
+MYSQL_ROOT_PASSWORD=admin
+MYSQL_USER=user
+MYSQL_PASSWORD=password
+
+SECRET_KEY=somesecretkey

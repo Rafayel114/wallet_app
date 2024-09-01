@@ -6,6 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Wallet, Transaction
 from .serializers import WalletSerializer, TransactionSerializer
 from .filters import WalletFilter, TransactionFilter
+from .decorators import timeout_decorator
+import time
 
 
 class WalletViewSet(viewsets.ModelViewSet):
@@ -17,6 +19,7 @@ class WalletViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     ordering = ['label']
 
+    @timeout_decorator(4)
     def get_queryset(self):
         # Возвращаем только кошелек, принадлежащий текущему пользователю
         user = self.request.user
@@ -38,6 +41,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
         except ValidationError as e:
             return JsonResponse({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
+    @timeout_decorator(4)
     def get_queryset(self):
         # Возвращаем только транзавкции, принадлежащие текущему пользователю
         user = self.request.user
